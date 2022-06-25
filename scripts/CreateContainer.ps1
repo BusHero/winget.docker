@@ -1,0 +1,1 @@
+Copy-Item -Path $PSScriptRoot\..\templates\Dockerfile.template $PSScriptRoot\..\output\Dockerfile
