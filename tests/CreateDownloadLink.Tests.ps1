@@ -3,9 +3,14 @@ BeforeAll {
 }
 
 Describe 'Test the generation of downloadable links' {
-	It 'Download preview version' {
-		$url = Get-DownloadLink -Major 1 -Minor 3 -Patch 1661 -Preview 
-		$url | Should -Be 'https://github.com/microsoft/winget-cli/releases/download/v.1.3.1661-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
+	It 'Download preview version' -ForEach @(
+		@{ Major = 1; Minor = 3; Patch = 1661; Url = 'https://github.com/microsoft/winget-cli/releases/download/v.1.3.1661-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+		@{ Major = 1; Minor = 3; Patch = 1391; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.3.1391-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+		@{ Major = 1; Minor = 2; Patch = 3411; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.2.3411-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+		@{ Major = 0; Minor = 4; Patch = 11391; Url = 'https://github.com/microsoft/winget-cli/releases/download/v-0.4.11391-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+		@{ Major = 0; Minor = 1; Patch = 4331; Url = 'https://github.com/microsoft/winget-cli/releases/download/v0.1.4331-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+	) {
+		Get-DownloadLink -Major $Major -Minor $Minor -Patch $Patch -Preview | Should -Be $Url
 	}
 
 	It 'Fail if the preview flag is not specified for the non preview version' {
@@ -26,10 +31,8 @@ Describe 'Test the generation of downloadable links' {
 		@{ Major = 1; Minor = 3; Patch = 1611; Url = 'https://github.com/microsoft/winget-cli/releases/download/v.1.3.1611/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
 		@{ Major = 1; Minor = 2; Patch = 10271; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.2.10271/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
 		@{ Major = 1; Minor = 1; Patch = 12701; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.1.12701/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
-		@{ Major = 1; Minor = 0; Patch = 12576; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.1.12576/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
+		@{ Major = 1; Minor = 0; Patch = 12576; Url = 'https://github.com/microsoft/winget-cli/releases/download/v1.0.12576/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle' }
 	) {
-		$url = Get-DownloadLink -Major $Major -Minor $Minor -Patch $Patch
-		$url | Should -Be $url
-
+		Get-DownloadLink -Major $Major -Minor $Minor -Patch $Patch | Should -Be $Url
 	}
 }
