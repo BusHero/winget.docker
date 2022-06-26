@@ -6,7 +6,7 @@ function Get-Tags {
 	git -C $TempGitRepo tag --list --sort=-refname --sort=-creatordate
 }
 
-function CreateDownloadLink {
+function Get-DownloadLink {
 	param (
 		$Major,
 		$Minor,
@@ -21,7 +21,7 @@ function CreateDownloadLink {
 		$tags = Get-Tags
 		$tags = foreach ($tag in $tags) {
 			$tag -match "v[\.-]?(?'major'\d+)\.(?'minor'\d+)\.(?'patch'\d+)(?'preview'-preview)?" | Out-Null
-			@{
+			@{   
 				Tag       = $tag
 				Major     = $Matches.Major;
 				Minor     = $Matches.Minor;
