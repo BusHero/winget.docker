@@ -55,6 +55,7 @@ function Get-DownloadLink {
 	if ($null -eq $tags -or $tags.Count -eq 0) {
 		throw "Tag ${Major}.${Minor}.${Patch} doesn't exist"
 	}
+	
 	$tag = $tags[0]
 	if ($tag) {
 		return $DonwloadableLinkTemplate -f $tag.Tag
