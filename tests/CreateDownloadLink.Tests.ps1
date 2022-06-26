@@ -19,6 +19,6 @@ Describe 'Test the generation of downloadable links' {
 	}
 
 	It 'Fail non existing tag' {
-		{ CreateDownloadLink -Major 1 -Minor 2 -Patch 1671 } | Should -Throw
+		{ CreateDownloadLink -Major 1 -Minor 2 -Patch 1671 } | Should -Throw "Tag 1.2.1671 doesn't exist" 
 	}
 }

@@ -1,4 +1,4 @@
-Describe 'Create Container' {
+Describe 'Create Container' -Skip {
 	BeforeAll {
 		& $PSScriptRoot\..\scripts\CreateContainer.ps1
 	}
