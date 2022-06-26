@@ -9,8 +9,12 @@ Describe 'Test the generation of downloadable links' {
 	}
 
 	It 'Download preview version' {
-		$url = Get-DownloadLink -Major 1 -Minor 3 -Patch 1661 
+		$url = Get-DownloadLink -Major 1 -Minor 3 -Patch 1661 -Preview 
 		$url | Should -Be 'https://github.com/microsoft/winget-cli/releases/download/v.1.3.1661-preview/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle'
+	}
+
+	It 'Fail if the preview flag is not specified for the non preview version' {
+		{ Get-DownloadLink -Major 1 -Minor 3 -Patch 1661 } | Should -Throw "Tag 1.3.1661 doesn't exist"
 	}
 
 	It 'Download latest' {
